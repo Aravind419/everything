@@ -1,0 +1,75 @@
+<div class="section expense-dashboard">
+    <div class="section-header">
+        <div class="header-left">
+            <h2><i class="fas fa-money-bill-wave"></i> Expense Tracker</h2>
+            <p>Track and manage your expenses</p>
+        </div>
+        <button class="btn btn-primary btn-large" onclick="showModal('expense-modal')">
+            <i class="fas fa-plus"></i> Add Expense
+        </button>
+    </div>
+
+    <div class="expense-summary">
+        <div class="summary-card">
+            <h3>Total Expenses</h3>
+            <p id="totalExpenses">$0.00</p>
+        </div>
+        <div class="summary-card">
+            <h3>This Month</h3>
+            <p id="monthlyExpenses">$0.00</p>
+        </div>
+        <div class="summary-card">
+            <h3>Average Daily</h3>
+            <p id="dailyAverage">$0.00</p>
+        </div>
+    </div>
+
+    <div class="expense-categories">
+        <div class="category-card" data-category="all">
+            <i class="fas fa-globe category-icon"></i>
+            <span class="category-name">All</span>
+        </div>
+        <div class="category-card" data-category="food">
+            <i class="fas fa-utensils category-icon"></i>
+            <span class="category-name">Food</span>
+        </div>
+        <div class="category-card" data-category="transport">
+            <i class="fas fa-car category-icon"></i>
+            <span class="category-name">Transport</span>
+        </div>
+        <div class="category-card" data-category="utilities">
+            <i class="fas fa-bolt category-icon"></i>
+            <span class="category-name">Utilities</span>
+        </div>
+        <div class="category-card" data-category="entertainment">
+            <i class="fas fa-film category-icon"></i>
+            <span class="category-name">Entertainment</span>
+        </div>
+        <div class="category-card" data-category="shopping">
+            <i class="fas fa-shopping-bag category-icon"></i>
+            <span class="category-name">Shopping</span>
+        </div>
+    </div>
+
+    <div class="expense-filters">
+        <input type="month" class="filter-input" id="monthFilter" title="Select month">
+        <select class="filter-input" id="categoryFilter" title="Filter by category">
+            <option value="">All Categories</option>
+            <option value="food">Food & Dining</option>
+            <option value="transport">Transportation</option>
+            <option value="utilities">Utilities</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="shopping">Shopping</option>
+            <option value="other">Other</option>
+        </select>
+        <input type="text" class="filter-input" placeholder="Search expenses..." id="searchExpense">
+    </div>
+
+    <div class="chart-container">
+        <!-- Chart will be rendered here -->
+    </div>
+
+    <div class="expense-list" id="expenseList">
+        <!-- Expenses will be loaded here -->
+    </div>
+</div> 

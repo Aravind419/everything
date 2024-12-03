@@ -1,0 +1,159 @@
+<div class="section subjects-section">
+    <div class="section-header">
+        <div class="header-left">
+            <h2><i class="fas fa-book"></i> Subjects</h2>
+            <p>Manage your study subjects and materials</p>
+        </div>
+        <button class="add-btn" onclick="showModal('subject-modal')">
+            <i class="fas fa-plus"></i> Add Subject
+        </button>
+    </div>
+
+    <div class="subjects-container">
+        <div class="subjects-sidebar">
+            <div class="progress-overview">
+                <h3>Study Progress</h3>
+                <div class="progress-circle" data-progress="0">
+                    <svg viewBox="0 0 36 36" class="circular-chart">
+                        <path class="circle-bg" d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        <path class="circle" stroke-dasharray="0, 100" d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                    </svg>
+                    <div class="progress-info">
+                        <span class="progress-percentage">0%</span>
+                        <span class="progress-label">Complete</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-categories">
+                <h4>Categories</h4>
+                <div class="category-list" id="subjectCategories">
+                    <!-- Categories will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="subjects-grid" id="subjectsList">
+            <!-- Subjects will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Subject Modal -->
+    <div id="subject-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Subject</h3>
+                <button class="close-btn" onclick="hideModal('subject-modal')" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="subjectName">Subject Name</label>
+                    <input type="text" id="subjectName" class="form-input" placeholder="Enter subject name">
+                </div>
+                <div class="form-group">
+                    <label for="subjectCategory">Category</label>
+                    <input type="text" id="subjectCategory" class="form-input" placeholder="e.g., Science, Math">
+                </div>
+                <div class="form-group">
+                    <label for="subjectDescription">Description</label>
+                    <textarea id="subjectDescription" class="form-input" placeholder="Brief description of the subject"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="subjectColor">Color Theme</label>
+                    <div class="color-picker">
+                        <div class="color-option" data-color="#4f46e5" style="background: #4f46e5"></div>
+                        <div class="color-option" data-color="#0ea5e9" style="background: #0ea5e9"></div>
+                        <div class="color-option" data-color="#10b981" style="background: #10b981"></div>
+                        <div class="color-option" data-color="#f59e0b" style="background: #f59e0b"></div>
+                        <div class="color-option" data-color="#ef4444" style="background: #ef4444"></div>
+                        <div class="color-option" data-color="#8b5cf6" style="background: #8b5cf6"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subjectIcon">Icon</label>
+                    <div class="icon-picker">
+                        <div class="icon-option" data-icon="book"><i class="fas fa-book"></i></div>
+                        <div class="icon-option" data-icon="flask"><i class="fas fa-flask"></i></div>
+                        <div class="icon-option" data-icon="calculator"><i class="fas fa-calculator"></i></div>
+                        <div class="icon-option" data-icon="microscope"><i class="fas fa-microscope"></i></div>
+                        <div class="icon-option" data-icon="globe"><i class="fas fa-globe"></i></div>
+                        <div class="icon-option" data-icon="paint-brush"><i class="fas fa-paint-brush"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideModal('subject-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="addSubject()">Add Subject</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this after the subject modal -->
+    <div id="materials-modal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3><span id="subjectTitle">Subject</span> Materials</h3>
+                <button class="close-btn" onclick="hideModal('materials-modal')" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="materials-container">
+                    <div class="materials-sidebar">
+                        <div class="materials-upload">
+                            <input type="file" id="materialFile" hidden multiple>
+                            <label for="materialFile" class="upload-area">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Drop files here or click to upload</span>
+                            </label>
+                        </div>
+                        <div class="materials-filters">
+                            <div class="filter-group">
+                                <h4>File Types</h4>
+                                <div class="filter-options">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" value="pdf" checked>
+                                        PDF Documents
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" value="image" checked>
+                                        Images
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" value="document" checked>
+                                        Documents
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="materials-content">
+                        <div class="materials-header">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" placeholder="Search materials..." onkeyup="searchMaterials(this.value)">
+                            </div>
+                            <div class="view-options">
+                                <button class="btn-icon" data-view="grid" title="Grid view">
+                                    <i class="fas fa-th-large"></i>
+                                </button>
+                                <button class="btn-icon" data-view="list" title="List view">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="materials-grid" id="materialsList">
+                            <!-- Materials will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

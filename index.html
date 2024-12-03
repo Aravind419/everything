@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Workspace</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sidebar -->
+      <nav class="sidebar">
+        <div class="profile-section" onclick="showModal('profile-modal')">
+          <div class="profile-image">
+            <img
+              id="userAvatar"
+              src="https://via.placeholder.com/100"
+              alt="Profile" />
+            <div class="online-status"></div>
+            <div class="edit-overlay">
+              <i class="fas fa-edit"></i>
+            </div>
+          </div>
+          <h3 id="userName">My Workspace</h3>
+          <p id="userEmail" class="user-email">user@example.com</p>
+        </div>
+
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            placeholder="Quick search..."
+            onkeyup="searchContent(this.value)" />
+        </div>
+
+        <div class="nav-links">
+          <div class="nav-group">
+            <h4>WORKSPACE</h4>
+            <a href="#" class="nav-link active" data-page="planner">
+              <i class="fas fa-calendar-day"></i>
+              <span>Daily Planner</span>
+            </a>
+            <a href="#" class="nav-link" data-page="subjects">
+              <i class="fas fa-book"></i>
+              <span>Subjects</span>
+            </a>
+            <a href="#" class="nav-link" data-page="expenses">
+              <i class="fas fa-money-bill-wave"></i>
+              <span>Expenses</span>
+            </a>
+          </div>
+
+          <div class="nav-group">
+            <h4>SOCIAL & RESOURCES</h4>
+            <a href="#" class="nav-link" data-page="social">
+              <i class="fas fa-share-alt"></i>
+              <span>Social Media</span>
+            </a>
+            <a href="#" class="nav-link" data-page="resources">
+              <i class="fas fa-link"></i>
+              <span>Resources</span>
+            </a>
+            <a href="#" class="nav-link" data-page="notes">
+              <i class="fas fa-sticky-note"></i>
+              <span>Notes</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <button
+            class="theme-toggle"
+            onclick="toggleTheme()"
+            title="Toggle Theme">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button
+            class="alarm-btn"
+            onclick="showModal('alarm-modal')"
+            title="Set Alarm">
+            <i class="fas fa-clock"></i>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="top-bar">
+          <div class="breadcrumb">
+            <i class="fas fa-home"></i>
+            <span id="currentSection">/ Daily Planner</span>
+          </div>
+          <div class="digital-clock" id="digitalClock"></div>
+          <div class="user-actions">
+            <button
+              class="icon-btn"
+              onclick="showModal('alarm-modal')"
+              title="Set Alarm">
+              <i class="fas fa-bell"></i>
+            </button>
+            <button
+              class="icon-btn"
+              onclick="toggleTheme()"
+              title="Toggle Theme">
+              <i class="fas fa-moon"></i>
+            </button>
+          </div>
+        </header>
+
+        <!-- Dynamic Content Container -->
+        <div id="pageContent" class="page-content">
+          <!-- Content will be loaded here -->
+        </div>
+      </main>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Edit Profile</h3>
+          <button
+            class="close-btn"
+            onclick="hideModal('profile-modal')"
+            title="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="profile-edit-form">
+            <div class="avatar-upload">
+              <img
+                id="avatarPreview"
+                src="https://via.placeholder.com/100"
+                alt="Profile Preview" />
+              <div class="upload-overlay">
+                <input
+                  type="file"
+                  id="avatarInput"
+                  accept="image/*"
+                  onchange="previewAvatar(this)"
+                  hidden />
+                <label for="avatarInput" class="upload-btn">
+                  <i class="fas fa-camera"></i>
+                  Change Photo
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="profileName">Display Name</label>
+              <input
+                type="text"
+                id="profileName"
+                class="form-input"
+                placeholder="Your name" />
+            </div>
+            <div class="form-group">
+              <label for="profileEmail">Email</label>
+              <input
+                type="email"
+                id="profileEmail"
+                class="form-input"
+                placeholder="Your email" />
+            </div>
+            <div class="form-group">
+              <label for="profileBio">Bio</label>
+              <textarea
+                id="profileBio"
+                class="form-input"
+                placeholder="Tell us about yourself"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-secondary"
+            onclick="hideModal('profile-modal')">
+            Cancel
+          </button>
+          <button class="btn btn-primary" onclick="updateProfile()">
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alarm Modal -->
+    <div id="alarm-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Set Alarm</h3>
+          <button
+            class="close-btn"
+            onclick="hideModal('alarm-modal')"
+            title="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="alarm-form">
+            <div class="form-group">
+              <label for="alarmTime">Time</label>
+              <input type="time" id="alarmTime" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label for="alarmLabel">Label</label>
+              <input
+                type="text"
+                id="alarmLabel"
+                class="form-input"
+                placeholder="Alarm label" />
+            </div>
+            <div class="form-group">
+              <label for="alarmSound">Sound</label>
+              <select id="alarmSound" class="form-input">
+                <option value="default">Default Alarm</option>
+                <option value="gentle">Gentle Chime</option>
+                <option value="urgent">Urgent Bell</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="alarmRepeat" />
+                Repeat Daily
+              </label>
+            </div>
+          </div>
+          <div class="active-alarms">
+            <h4>Active Alarms</h4>
+            <div id="alarmsList" class="alarms-list">
+              <!-- Active alarms will be listed here -->
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="hideModal('alarm-modal')">
+            Cancel
+          </button>
+          <button class="btn btn-primary" onclick="setAlarm()">
+            Set Alarm
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

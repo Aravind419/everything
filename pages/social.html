@@ -1,0 +1,88 @@
+<div class="section social-section">
+    <div class="section-header">
+        <div class="header-left">
+            <h2><i class="fas fa-share-alt"></i> Social Media Hub</h2>
+            <p>Manage your social media profiles and connections</p>
+        </div>
+        <button class="add-btn" onclick="showModal('social-modal')">
+            <i class="fas fa-plus"></i> Add Profile
+        </button>
+    </div>
+
+    <div class="social-container">
+        <div class="social-grid" id="socialProfiles">
+            <!-- Social profiles will be loaded here -->
+        </div>
+
+        <div class="social-analytics">
+            <h3>Analytics Overview</h3>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <i class="fas fa-users"></i>
+                    <div class="analytics-info">
+                        <span class="analytics-label">Total Followers</span>
+                        <span class="analytics-value" id="totalFollowers">0</span>
+                    </div>
+                </div>
+                <div class="analytics-card">
+                    <i class="fas fa-share-square"></i>
+                    <div class="analytics-info">
+                        <span class="analytics-label">Active Profiles</span>
+                        <span class="analytics-value" id="activeProfiles">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Profile Modal -->
+    <div id="social-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Social Profile</h3>
+                <button class="close-btn" onclick="hideModal('social-modal')" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="socialPlatform">Platform</label>
+                    <select id="socialPlatform" class="form-input" onchange="updateProfileFields()">
+                        <option value="instagram">Instagram</option>
+                        <option value="twitter">Twitter</option>
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="github">GitHub</option>
+                        <option value="youtube">YouTube</option>
+                        <option value="facebook">Facebook</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="socialUsername">Username</label>
+                    <input type="text" id="socialUsername" class="form-input" placeholder="@username">
+                </div>
+                <div class="form-group">
+                    <label for="socialUrl">Profile URL</label>
+                    <input type="url" id="socialUrl" class="form-input" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label for="socialFollowers">Followers Count</label>
+                    <input type="number" id="socialFollowers" class="form-input" placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label for="socialBio">Bio/Description</label>
+                    <textarea id="socialBio" class="form-input" placeholder="Brief description of your profile"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="socialActive" checked>
+                        Profile is active
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideModal('social-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="addSocialProfile()">Add Profile</button>
+            </div>
+        </div>
+    </div>
+</div> 

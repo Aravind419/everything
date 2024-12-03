@@ -1,0 +1,108 @@
+<div class="section planner-section">
+    <div class="section-header">
+        <div class="header-left">
+            <h2><i class="fas fa-calendar-day"></i> Daily Planner</h2>
+            <p>Organize your day effectively</p>
+        </div>
+        <div class="date-navigation">
+            <button class="nav-btn" onclick="changeDate(-1)" title="Previous day">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="current-date">
+                <h3 id="currentDate">Today</h3>
+                <span id="fullDate">Wednesday, March 13, 2024</span>
+            </div>
+            <button class="nav-btn" onclick="changeDate(1)" title="Next day">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="planner-container">
+        <div class="time-slots">
+            <div class="time-slot-header">
+                <span>Time</span>
+                <span>Task</span>
+                <span>Priority</span>
+                <span>Actions</span>
+            </div>
+            <div class="time-slot-grid" id="timeSlots">
+                <!-- Time slots will be generated here -->
+            </div>
+        </div>
+
+        <div class="task-summary">
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="summary-info">
+                    <span class="summary-label">Total Tasks</span>
+                    <span class="summary-value" id="totalTasks">0</span>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="summary-info">
+                    <span class="summary-label">Completed</span>
+                    <span class="summary-value" id="completedTasks">0</span>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="summary-info">
+                    <span class="summary-label">Remaining</span>
+                    <span class="summary-value" id="remainingTasks">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Add Task Button -->
+    <button class="floating-add-btn" onclick="showModal('task-modal')">
+        <i class="fas fa-plus"></i>
+        <span>Quick Add Task</span>
+    </button>
+</div>
+
+<!-- Task Modal -->
+<div id="task-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add New Task</h3>
+            <button class="close-btn" onclick="hideModal('task-modal')" title="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="taskTitle">Task Title</label>
+                <input type="text" id="taskTitle" class="form-input" placeholder="What needs to be done?">
+            </div>
+            <div class="form-group">
+                <label for="taskTime">Time</label>
+                <input type="time" id="taskTime" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="taskPriority">Priority</label>
+                <select id="taskPriority" class="form-input" title="Select priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="taskDescription">Description</label>
+                <textarea id="taskDescription" class="form-input" placeholder="Add more details about the task"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="hideModal('task-modal')">Cancel</button>
+            <button class="btn btn-primary" onclick="addTask()">Add Task</button>
+        </div>
+    </div>
+</div> 

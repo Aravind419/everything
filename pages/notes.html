@@ -1,0 +1,59 @@
+<div class="section notes-section">
+    <div class="section-header">
+        <div class="header-left">
+            <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+            <p>Capture your thoughts and ideas</p>
+        </div>
+        <button class="add-btn" onclick="showModal('note-modal')">
+            <i class="fas fa-plus"></i> Add Note
+        </button>
+    </div>
+
+    <div class="notes-container">
+        <div class="notes-sidebar">
+            <div class="notes-search">
+                <input type="text" placeholder="Search notes..." class="form-input" onkeyup="searchNotes(this.value)">
+            </div>
+            <div class="notes-categories">
+                <h4>Categories</h4>
+                <div class="category-list" id="noteCategories">
+                    <!-- Categories will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="notes-grid" id="notesList">
+            <!-- Notes will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Note Modal -->
+    <div id="note-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Note</h3>
+                <button class="close-btn" onclick="hideModal('note-modal')" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="noteTitle">Title</label>
+                    <input type="text" id="noteTitle" class="form-input" placeholder="Note title">
+                </div>
+                <div class="form-group">
+                    <label for="noteCategory">Category</label>
+                    <input type="text" id="noteCategory" class="form-input" placeholder="Category (optional)">
+                </div>
+                <div class="form-group">
+                    <label for="noteContent">Content</label>
+                    <textarea id="noteContent" class="form-input note-editor" placeholder="Write your note here..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideModal('note-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="addNote()">Save Note</button>
+            </div>
+        </div>
+    </div>
+</div> 
